@@ -20,6 +20,19 @@ from .dump import dump  # noqa: F401
 from .utils import is_image_file
 
 
+# Initialize coverage tracking global variable
+global branch_coverage
+branch_coverage = {
+    "user_input_1": False,  
+    "user_input_2": False,  
+    "user_input_3": False,
+    "tool_error_1": False,
+    "tool_error_2": False,
+    "tool_error_3": False,
+    "tool_error_4": False,
+    "tool_error_5": False,
+}
+
 class AutoCompleter(Completer):
     def __init__(self, root, rel_fnames, addable_rel_fnames, commands, encoding):
         self.commands = commands
@@ -182,6 +195,7 @@ class InputOutput:
 
     def get_input(self, root, rel_fnames, addable_rel_fnames, commands):
         if self.pretty:
+            # branch_coverage["get_input_0"] = True
             style = dict(style=self.user_input_color) if self.user_input_color else dict()
             self.console.rule(**style)
         else:
@@ -211,6 +225,7 @@ class InputOutput:
                 root, rel_fnames, addable_rel_fnames, commands, self.encoding
             )
             if multiline_input:
+                # branch_coverage["get_input_1"] = True
                 show = ". "
 
             session_kwargs = {
@@ -223,9 +238,11 @@ class InputOutput:
                 "lexer": PygmentsLexer(MarkdownLexer),
             }
             if style:
+                # branch_coverage["get_input_2"] = True
                 session_kwargs["style"] = style
 
             if self.input_history_file is not None:
+                # branch_coverage["get_input_3"] = True
                 session_kwargs["history"] = FileHistory(self.input_history_file)
 
             kb = KeyBindings()
@@ -238,15 +255,19 @@ class InputOutput:
             line = session.prompt()
 
             if line and line[0] == "{" and not multiline_input:
+                # branch_coverage["get_input_4"] = True
                 multiline_input = True
                 inp += line[1:] + "\n"
                 continue
             elif line and line[-1] == "}" and multiline_input:
+                # branch_coverage["get_input_5"] = True
                 inp += line[:-1] + "\n"
                 break
             elif multiline_input:
+                # branch_coverage["get_input_6"] = True
                 inp += line + "\n"
             else:
+                # branch_coverage["get_input_7"] = True
                 inp = line
                 break
 
@@ -267,14 +288,18 @@ class InputOutput:
         return fh.load_history_strings()
 
     def user_input(self, inp, log_only=True):
+    
         if not log_only:
+            branch_coverage["user_input_1"] = True
             style = dict(style=self.user_input_color) if self.user_input_color else dict()
             self.console.print(inp, **style)
 
         prefix = "####"
         if inp:
+            branch_coverage["user_input_2"] = True
             hist = inp.splitlines()
         else:
+            branch_coverage["user_input_3"] = True
             hist = ["<blank>"]
 
         hist = f"  \n{prefix} ".join(hist)
@@ -327,13 +352,18 @@ class InputOutput:
         self.num_error_outputs += 1
 
         if message.strip():
+            branch_coverage["tool_error_1"] = True
             if "\n" in message:
+                branch_coverage["tool_error_2"] = True
                 for line in message.splitlines():
                     self.append_chat_history(line, linebreak=True, blockquote=True, strip=strip)
             else:
+                branch_coverage["tool_error_3"] = True
                 if strip:
+                    branch_coverage["tool_error_4"] = True
                     hist = message.strip()
                 else:
+                    branch_coverage["tool_error_5"] = True
                     hist = message
                 self.append_chat_history(hist, linebreak=True, blockquote=True)
 
@@ -366,3 +396,6 @@ class InputOutput:
         if self.chat_history_file is not None:
             with self.chat_history_file.open("a", encoding=self.encoding) as f:
                 f.write(text)
+
+
+

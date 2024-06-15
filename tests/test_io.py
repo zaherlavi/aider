@@ -3,9 +3,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
-from aider.io import AutoCompleter, InputOutput
+from aider.io import AutoCompleter, InputOutput, branch_coverage
 from aider.utils import ChdirTemporaryDirectory
-
 
 class TestInputOutput(unittest.TestCase):
     def test_no_color_environment_variable(self):
@@ -59,6 +58,90 @@ class TestInputOutput(unittest.TestCase):
         with patch("aider.io.open", side_effect=IsADirectoryError):
             result = io.get_input(root, rel_fnames, addable_rel_fnames, commands)
             self.assertEqual(result, "test input")
+
+    @patch("aider.io.PromptSession")
+    def test_user_input_empty_input(self, MockPromptSession):
+        # Mock the PromptSession to simulate user input
+        mock_session = MockPromptSession.return_value
+        mock_session.prompt.return_value = " "  # Simulate non-empty input
+
+        io = InputOutput(pretty=False)  # Windows tests throw UnicodeDecodeError
+        io.user_input("", log_only=True)
+
+        # Print branch coverage results
+        for branch, hit in branch_coverage.items():
+            print(f"{branch} was {'hit' if hit else 'not hit'}")
+
+        # Assert that specific branches were hit
+        self.assertFalse(branch_coverage["user_input_1"])
+        self.assertTrue(branch_coverage["user_input_2"])  # Adjust based on expected execution
+        self.assertTrue(branch_coverage["user_input_3"])
+
+    @patch("aider.io.PromptSession")
+    def test_user_input_log_only_false(self, MockPromptSession):
+        # Mock the PromptSession to simulate user input
+        mock_session = MockPromptSession.return_value
+        mock_session.prompt.return_value = "input"  # Simulate non-empty input
+
+        io = InputOutput(pretty=False)  # Windows tests throw UnicodeDecodeError
+        io.user_input("input", log_only=False)
+
+        # Print branch coverage results
+        for branch, hit in branch_coverage.items():
+            print(f"{branch} was {'hit' if hit else 'not hit'}")
+
+        # Assert that specific branches were hit
+        self.assertTrue(branch_coverage["user_input_1"])
+        self.assertTrue(branch_coverage["user_input_2"])  # Adjust based on expected execution
+        self.assertTrue(branch_coverage["user_input_3"])
+
+    @patch("aider.io.PromptSession")
+    def test_tool_error_endline_in_message(self, mock_prompt):
+        mock_prompt.return_value = "Message\n"
+        io = InputOutput(pretty=False)
+
+        io.tool_error("Message\n", strip=True)
+
+        for branch, hit in branch_coverage.items():
+            print(f"{branch} was {'hit' if hit else 'not hit'}")
+
+        self.assertTrue(branch_coverage["tool_error_1"])
+        self.assertTrue(branch_coverage["tool_error_2"])
+        self.assertTrue(branch_coverage["tool_error_3"])
+        self.assertTrue(branch_coverage["tool_error_4"])
+        self.assertFalse(branch_coverage["tool_error_5"])
+
+    @patch("aider.io.PromptSession")
+    def test_tool_error_stripe_false(self, mock_prompt):
+        mock_prompt.return_value = "Message sent"
+        io = InputOutput(pretty=False)
+
+        io.tool_error("Message sent", strip=True)
+
+        for branch, hit in branch_coverage.items():
+            print(f"{branch} was {'hit' if hit else 'not hit'}")
+
+        self.assertTrue(branch_coverage["tool_error_1"])
+        self.assertTrue(branch_coverage["tool_error_3"])
+        self.assertTrue(branch_coverage["tool_error_4"])
+        self.assertFalse(branch_coverage["tool_error_2"])
+        self.assertFalse(branch_coverage["tool_error_5"])
+
+    @patch("aider.io.PromptSession")
+    def test_tool_error_stripe_false(self, mock_prompt):
+        mock_prompt.return_value = "Message sent with strip false"
+        io = InputOutput(pretty=False)
+
+        io.tool_error("Message sent with strip false", strip=False)
+
+        for branch, hit in branch_coverage.items():
+            print(f"{branch} was {'hit' if hit else 'not hit'}")
+
+        self.assertTrue(branch_coverage["tool_error_1"])
+        self.assertTrue(branch_coverage["tool_error_2"])
+        self.assertTrue(branch_coverage["tool_error_3"])
+        self.assertTrue(branch_coverage["tool_error_4"])
+        self.assertTrue(branch_coverage["tool_error_5"])
 
 
 if __name__ == "__main__":
