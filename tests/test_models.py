@@ -1,6 +1,8 @@
 import unittest
-
+from unittest.mock import patch
 from aider.models import Model
+from aider.models import validate_variables
+from aider.models import branch_coverage
 
 
 class TestModels(unittest.TestCase):
@@ -22,6 +24,99 @@ class TestModels(unittest.TestCase):
 
         model = Model("gpt-4-0613")
         self.assertEqual(model.info["max_input_tokens"], 8 * 1024)
+
+
+
+class TestModelsValidateVariables(unittest.TestCase):
+
+    def test_validate_variables_all_present(self):
+        with patch('aider.models.os.environ', {'var1', 'var2'}):
+            branch_coverage["val_var_branch_1"] = False
+            branch_coverage["val_var_branch_2"] = False
+            res = validate_variables(['var1', 'var2'])
+            for branch, hit in branch_coverage.items():
+                print(f"{branch} was {'hit' if hit else 'not hit'}")
+            self.assertFalse(branch_coverage["val_var_branch_1"])  
+            self.assertFalse(branch_coverage["val_var_branch_2"])  
+            self.assertTrue(res['keys_in_environment'])
+            self.assertEqual(res['missing_keys'], [])
+
+
+    def test_validate_variables_one_missing(self):
+        with patch('aider.models.os.environ', {'var1'}):
+            branch_coverage["val_var_branch_1"] = False
+            branch_coverage["val_var_branch_2"] = False
+            res = validate_variables(['var1', 'var2'])
+            for branch, hit in branch_coverage.items():
+                print(f"{branch} was {'hit' if hit else 'not hit'}")
+            self.assertTrue(branch_coverage["val_var_branch_1"])  
+            self.assertTrue(branch_coverage["val_var_branch_2"])  
+            self.assertFalse(res['keys_in_environment'])
+            self.assertEqual(res['missing_keys'], ['var2'])
+
+    
+    def test_validate_variables_all_missing(self):
+        with patch('aider.models.os.environ', {}):
+            branch_coverage["val_var_branch_1"] = False
+            branch_coverage["val_var_branch_2"] = False
+            res = validate_variables(['var1', 'var2'])
+            for branch, hit in branch_coverage.items():
+                print(f"{branch} was {'hit' if hit else 'not hit'}")
+            self.assertTrue(branch_coverage["val_var_branch_1"])  
+            self.assertTrue(branch_coverage["val_var_branch_2"])  
+            self.assertFalse(res['keys_in_environment'])
+            self.assertEqual(res['missing_keys'], ['var1', 'var2'])
+
+
+
+class TestModelConfigureSettings(unittest.TestCase):
+    def setUp(self):
+        self.model = Model("dummy_model")
+
+    def test_configure_model_settings_direct_match(self):
+        self.model.configure_model_settings("gpt-4o")
+        for branch, hit in branch_coverage.items():
+            print(f"{branch} was {'hit' if hit else 'not hit'}")
+        self.assertEqual(self.model.edit_format, "diff")
+        self.assertTrue(self.model.use_repo_map)
+        self.assertTrue(self.model.send_undo_reply)
+        self.assertTrue(self.model.reminder_as_sys_msg)
+        self.assertTrue(branch_coverage["val_configure_model_settings_1"])
+
+    def test_configure_model_settings_llama3_70b(self):
+        self.model.configure_model_settings("llama-3-70b")
+        for branch, hit in branch_coverage.items():
+            print(f"{branch} was {'hit' if hit else 'not hit'}")
+        self.assertEqual(self.model.edit_format, "diff")
+        self.assertTrue(self.model.use_repo_map)
+        self.assertTrue(self.model.send_undo_reply)
+        self.assertTrue(self.model.examples_as_sys_msg)
+        self.assertTrue(branch_coverage["val_configure_model_settings_2"])
+
+    def test_configure_model_settings_gpt_4_turbo_preview(self):
+        self.model.configure_model_settings("gpt-4-turbo-preview")
+        for branch, hit in branch_coverage.items():
+            print(f"{branch} was {'hit' if hit else 'not hit'}")
+        self.assertEqual(self.model.edit_format, "udiff")
+        self.assertTrue(self.model.use_repo_map)
+        self.assertTrue(self.model.send_undo_reply)
+        self.assertTrue(branch_coverage["val_configure_model_settings_3"])
+
+    def test_configure_model_settings_gpt_4_opus(self):
+        self.model.configure_model_settings("claude-3-opus")
+        for branch, hit in branch_coverage.items():
+            print(f"{branch} was {'hit' if hit else 'not hit'}")
+        self.assertEqual(self.model.edit_format, "diff")
+        self.assertTrue(self.model.use_repo_map)
+        self.assertTrue(self.model.send_undo_reply)
+        self.assertTrue(branch_coverage["val_configure_model_settings_4"])
+
+    def test_configure_model_settings_gpt_35(self):
+        self.model.configure_model_settings("gpt-3.5")
+        for branch, hit in branch_coverage.items():
+            print(f"{branch} was {'hit' if hit else 'not hit'}")
+        self.assertTrue(self.model.reminder_as_sys_msg)
+        self.assertTrue(branch_coverage["val_configure_model_settings_5"])
 
 
 if __name__ == "__main__":

@@ -100,6 +100,72 @@ Improved branch coverage of the tool_error function from 75% to 100%. In the exi
 
 
 
+
+## Vansham Ahluwalia (vunet-id: vah201)
+
+### First Function
+
+models.validate_variables in models.py file
+
+
+[Link to the commit](https://github.com/zaherlavi/aider/commit/9ee753e4e772ae2d1bbe461347927ba0d8835a9d?diff=split&w=0)
+
+<Provide a screenshot of the coverage results output by the instrumentation>
+
+![Alt text](/Imgaes/vansham_validate_variables.png)
+
+### Second Function
+
+InputOutput.tool_error in io.py file
+
+[Link to the commit](https://github.com/zaherlavi/aider/commit/9ee753e4e772ae2d1bbe461347927ba0d8835a9d?diff=split&w=0)
+
+![Alt text](/Imgaes/vansham_configure_model_settings.png)
+
+
+## Coverage improvement
+
+### Individual tests
+
+<The following is supposed to be repeated for each group member>
+
+<Group member name>
+
+## Vansham Ahluwalia (vunet-id: vah201)
+
+### Test 1
+
+[Link to the commit](https://github.com/zaherlavi/aider/commit/9ee753e4e772ae2d1bbe461347927ba0d8835a9d?diff=split&w=0)
+
+<Provide a screenshot of the old coverage results (the same as you already showed above)>
+
+
+![Alt text](/Imgaes/vansham_old_percentage_validate_variables.png)
+
+<Provide a screenshot of the new coverage results>
+
+
+![Alt text](/Imgaes/vansham_new_percentage_validate_variables.png)
+
+<State the coverage improvement with a number and elaborate on why the coverage is improved>
+
+Improved branch coverage of the validate_variables function from 0% to 100%. In the existing tests for the models.py file, the function was not tested and covered at all. Using my own coverage tool, I identified the cases and wrote three tests for the validate_variables function. These tests are included in the test_models file, which has been committed to GitHub and can be accessed using the link above.
+
+### Test 2
+
+<Provide the same kind of information provided for Test 1>
+
+[Link to the commit](https://github.com/zaherlavi/aider/commit/9ee753e4e772ae2d1bbe461347927ba0d8835a9d?diff=split&w=0)
+
+![Alt text](/Imgaes/vansham_old_percentage_configure_model_settings.png)
+![Alt text](/Imgaes/vansham_new_percentage_configure_model_settings.png)
+
+Improved branch coverage of the configure_model_settings function from 65% to 94%. In the existing tests for the models.py file, the function was not tested and covered at all. Using my own coverage tool, I identified the cases and wrote five tests for the configure_model_settings function. These tests are included in the test_models file, which has been committed to GitHub and can be accessed using the link above.
+
+
+
+
+
 ### Overall
 
 <Provide a screenshot of the old coverage results by running an existing tool (the same as you already showed above)>
