@@ -14,6 +14,17 @@ from aider.litellm import litellm
 
 DEFAULT_MODEL_NAME = "gpt-4o"
 
+global branch_coverage
+branch_coverage = {
+    "val_var_branch_1": False,
+    "val_var_branch_2": False,
+    "val_configure_model_settings_1": False,
+    "val_configure_model_settings_2": False,
+    "val_configure_model_settings_3": False,
+    "val_configure_model_settings_4": False,
+    "val_configure_model_settings_5": False,
+    "val_configure_model_settings_6": False,
+}
 
 @dataclass
 class ModelSettings:
@@ -294,6 +305,7 @@ class Model:
         for ms in MODEL_SETTINGS:
             # direct match, or match "provider/<model>"
             if model == ms.name:
+                branch_coverage["val_configure_model_settings_1"] = True
                 for field in fields(ModelSettings):
                     val = getattr(ms, field.name)
                     setattr(self, field.name, val)
@@ -302,6 +314,7 @@ class Model:
         model = model.lower()
 
         if ("llama3" in model or "llama-3" in model) and "70b" in model:
+            branch_coverage["val_configure_model_settings_2"] = True
             self.edit_format = "diff"
             self.use_repo_map = True
             self.send_undo_reply = True
@@ -309,22 +322,26 @@ class Model:
             return  # <--
 
         if "gpt-4-turbo" in model or ("gpt-4-" in model and "-preview" in model):
+            branch_coverage["val_configure_model_settings_3"] = True
             self.edit_format = "udiff"
             self.use_repo_map = True
             self.send_undo_reply = True
             return  # <--
 
         if "gpt-4" in model or "claude-3-opus" in model:
+            branch_coverage["val_configure_model_settings_4"] = True
             self.edit_format = "diff"
             self.use_repo_map = True
             self.send_undo_reply = True
             return  # <--
 
         if "gpt-3.5" in model or "gpt-4" in model:
+            branch_coverage["val_configure_model_settings_5"] = True
             self.reminder_as_sys_msg = True
 
         # use the defaults
         if self.edit_format == "diff":
+            branch_coverage["val_configure_model_settings_6"] = True
             self.use_repo_map = True
 
     def __str__(self):
@@ -431,8 +448,10 @@ def validate_variables(vars):
     missing = []
     for var in vars:
         if var not in os.environ:
+            branch_coverage["val_var_branch_1"] = True
             missing.append(var)
     if missing:
+        branch_coverage["val_var_branch_2"] = True
         return dict(keys_in_environment=False, missing_keys=missing)
     return dict(keys_in_environment=True, missing_keys=missing)
 
