@@ -13,6 +13,17 @@ from tree_sitter_languages import get_parser  # noqa: E402
 # tree_sitter is throwing a FutureWarning
 warnings.simplefilter("ignore", category=FutureWarning)
 
+global branch_coverage
+branch_coverage = {
+    "run_cmd1": False,
+    "run_cmd2": False,
+    "py_lint1": False,
+    "py_lint2": False,
+    "py_lint_1": False,
+    "py_lint_2": False,
+    "py_lint_3": False,
+    "py_lint_4": False,
+}
 
 class Linter:
     def __init__(self, encoding="utf-8", root=None):
@@ -47,8 +58,10 @@ class Linter:
         stdout, _ = process.communicate()
         errors = stdout.decode()
         if process.returncode == 0:
+            branch_coverage["run_cmd1"] = True
             return  # zero exit status
 
+        branch_coverage["run_cmd2"] = True
         cmd = " ".join(cmd)
         res = f"## Running: {cmd}\n\n"
         res += errors
@@ -102,21 +115,28 @@ class Linter:
 
         try:
             flake_res = self.run_cmd(flake8, rel_fname, code)
+            branch_coverage["py_lint1"] = True
         except FileNotFoundError:
             flake_res = None
+            branch_coverage["py_lint2"] = True
 
         text = ""
         lines = set()
         for res in [basic_res, compile_res, flake_res]:
             if not res:
+                branch_coverage["py_lint_1"] = True
                 continue
             if text:
+                branch_coverage["py_lint_2"] = True
                 text += "\n"
             text += res.text
             lines.update(res.lines)
 
         if text or lines:
+            branch_coverage["py_lint_3"] = True
             return LintResult(text, lines)
+        else:
+            branch_coverage["py_lint_4"] = True
 
 
 @dataclass
@@ -236,6 +256,9 @@ def main():
         if errors:
             print(errors)
 
+    # Print branch coverage results
+    for branch, hit in branch_coverage.items():
+        print(f"{branch} was {'hit' if hit else 'not hit'}")
 
 if __name__ == "__main__":
     main()
