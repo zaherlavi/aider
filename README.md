@@ -173,7 +173,7 @@ models.token_count in models.py file
 
 <Provide a screenshot of the coverage results output by the instrumentation>
 
-![Alt text](/Imgaes/shadman-token_hit.png)
+![Alt text](/Imgaes/shadman-token_hit.jpg)
 
 ### Second Function
 
@@ -181,7 +181,7 @@ models.get_weak_model in models.py file
 
 [Link to the commit](https://github.com/zaherlavi/aider/commit/cb27a2350bcb5f1c6b4e2932572fe041cffd19a8)
 
-![Alt text](/Imgaes/shadman-weak_hit.png)
+![Alt text](/Imgaes/shadman-weak_hit.jpg)
 
 
 ## Coverage improvement
@@ -201,12 +201,12 @@ models.get_weak_model in models.py file
 <Provide a screenshot of the old coverage results (the same as you already showed above)>
 
 
-![Alt text](/Imgaes/shadman-token_count-before.jpg)
+![Alt text](/Imgaes/shadman-token_count-before.png)
 
 <Provide a screenshot of the new coverage results>
 
 
-![Alt text](/Imgaes/shadman-token_count-after.jpg)
+![Alt text](/Imgaes/shadman-token_count-after.png)
 
 <State the coverage improvement with a number and elaborate on why the coverage is improved>
 
