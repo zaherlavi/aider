@@ -223,7 +223,47 @@ Improved branch coverage of the token_count function from 83% to 100%. In the ex
 
 Improved branch coverage of the get_weak_model function from 90% to 100%. In the existing tests for the models.py file, the function was not tested and covered at all. Using my own coverage tool, I identified the cases and wrote one test for the get_weak_model function. The test is included in the test_models file, which has been committed to GitHub and can be accessed using the link above.
 
+## Ana Mafiyusef (vunet-id: ama487)
 
+### First Function
+run_cmd in linter.py file
+
+[Link to the commit](https://github.com/zaherlavi/aider/commit/4a5ed2828e8fb2d297868e9bbef449459c21b8d4)
+
+![Alt text](https://github.com/zaherlavi/aider/blob/main/Imgaes/ana-run_cmd.png?raw=true)
+
+## Second Function
+py_lint in linter.py file 
+
+[Link to the commit](https://github.com/zaherlavi/aider/commit/4a5ed2828e8fb2d297868e9bbef449459c21b8d4)
+
+![Alt text](https://github.com/zaherlavi/aider/blob/main/Imgaes/ana_py_lint.png?raw=true)
+
+## Coverage improvement
+
+### Individual tests
+
+<The following is supposed to be repeated for each group member>
+
+<Group member name>
+
+## Ana Mafiyusef (vunet-id: ama487)
+
+### Test 1
+[Link to the commit](https://github.com/zaherlavi/aider/commit/11b3b6eccf4529b64a31fd20f580d2ecaddf256a)
+
+![Alt text](https://github.com/zaherlavi/aider/blob/main/Imgaes/ana_run_cmd_before.png?raw=true)
+
+![Alt text](https://github.com/zaherlavi/aider/blob/main/Imgaes/ana_run_cmd_afterr.png?raw=true)
+
+I improved the branch coverage of the run_cmd function from 0% to 81%. Initially, there were no test files for linter.py, so I created a new file, test_linter.py.The test is included in the test_models file, which has been committed to GitHub and can be accessed using the link above.
+### Test 2
+
+![Alt text](https://github.com/zaherlavi/aider/blob/main/Imgaes/ana_py_lint_before.png?raw=true)
+
+![Alt text](https://github.com/zaherlavi/aider/blob/main/Imgaes/ana_py_lint_after.png?raw=true)
+
+I improved the branch coverage of the run_cmd function from 0% to 84%. Initially, there were no test files for linter.py, so I created a new file, test_linter.py.The test is included in the test_models file, which has been committed to GitHub and can be accessed using the link above.
 
 ### Overall
 
