@@ -25,6 +25,27 @@ class TestModels(unittest.TestCase):
         model = Model("gpt-4-0613")
         self.assertEqual(model.info["max_input_tokens"], 8 * 1024)
 
+    def test_token_count_branch(self):
+        model = Model("gpt-3.5-turbo")
+        
+        # Save the original tokenizer method
+        original_tokenizer = model.tokenizer
+
+        # Temporarily remove the tokenizer method to hit the branch
+        model.tokenizer = None
+
+        # Call token_count to hit the branch
+        model.token_count("test message")
+
+        print(model.name)
+        print(model.coverage['tokenizer_branch_hit'])
+
+        # Check if the branch was hit
+        self.assertTrue(branch_coverage['tokenizer_branch_hit'])
+
+        # Restore the original tokenizer method
+        model.tokenizer = original_tokenizer
+
 
 
 class TestModelsValidateVariables(unittest.TestCase):
