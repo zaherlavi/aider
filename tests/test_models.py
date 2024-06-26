@@ -25,6 +25,12 @@ class TestModels(unittest.TestCase):
         model = Model("gpt-4-0613")
         self.assertEqual(model.info["max_input_tokens"], 8 * 1024)
 
+    def test_get_weak_model_1(self):
+        model = Model("gpt-4", weak_model = "gpt-3.5-turbo")
+        for branch, hit in branch_coverage.items():
+             print(f"{branch} was {'hit' if hit else 'not hit'}")
+        self.assertTrue(branch_coverage['weak model 1'])
+    
     def test_token_count_branch(self):
         model = Model("gpt-3.5-turbo")
         
