@@ -201,12 +201,12 @@ models.get_weak_model in models.py file
 <Provide a screenshot of the old coverage results (the same as you already showed above)>
 
 
-![Alt text](/Imgaes/shadman-token_count-before.png)
+![Alt text](/Imgaes/shadman-token_count-before.jpg)
 
 <Provide a screenshot of the new coverage results>
 
 
-![Alt text](/Imgaes/shadman-token_count-after.png)
+![Alt text](/Imgaes/shadman-token_count-after.jpg)
 
 <State the coverage improvement with a number and elaborate on why the coverage is improved>
 
