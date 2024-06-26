@@ -22,7 +22,6 @@ branch_coverage = {
     "py_lint_1": False,
     "py_lint_2": False,
     "py_lint_3": False,
-    "py_lint_4": False,
 }
 
 class Linter:
@@ -58,10 +57,9 @@ class Linter:
         stdout, _ = process.communicate()
         errors = stdout.decode()
         if process.returncode == 0:
-            branch_coverage["run_cmd1"] = True
+            #branch_coverage["run_cmd1"] = True
             return  # zero exit status
 
-        branch_coverage["run_cmd2"] = True
         cmd = " ".join(cmd)
         res = f"## Running: {cmd}\n\n"
         res += errors
@@ -72,6 +70,7 @@ class Linter:
             filename, linenums = next(iter(filenames_linenums.items()))
             linenums = [num - 1 for num in linenums]
 
+            #branch_coverage["run_cmd2"] = True
         return LintResult(text=res, lines=linenums)
 
     def lint(self, fname, cmd=None):
@@ -115,28 +114,27 @@ class Linter:
 
         try:
             flake_res = self.run_cmd(flake8, rel_fname, code)
-            branch_coverage["py_lint1"] = True
+            #branch_coverage["py_lint1"] = True
         except FileNotFoundError:
             flake_res = None
-            branch_coverage["py_lint2"] = True
+            #branch_coverage["py_lint2"] = True
 
         text = ""
         lines = set()
         for res in [basic_res, compile_res, flake_res]:
             if not res:
-                branch_coverage["py_lint_1"] = True
+                #branch_coverage["py_lint_1"] = True
                 continue
             if text:
-                branch_coverage["py_lint_2"] = True
+                #branch_coverage["py_lint_2"] = True
                 text += "\n"
             text += res.text
             lines.update(res.lines)
 
         if text or lines:
-            branch_coverage["py_lint_3"] = True
+            #branch_coverage["py_lint_3"] = True
             return LintResult(text, lines)
-        else:
-            branch_coverage["py_lint_4"] = True
+
 
 
 @dataclass
