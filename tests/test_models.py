@@ -43,9 +43,6 @@ class TestModels(unittest.TestCase):
         # Call token_count to hit the branch
         model.token_count("test message")
 
-        print(model.name)
-        print(model.coverage['tokenizer_branch_hit'])
-
         # Check if the branch was hit
         self.assertTrue(branch_coverage['tokenizer_branch_hit'])
 
