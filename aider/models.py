@@ -24,6 +24,10 @@ branch_coverage = {
     "val_configure_model_settings_4": False,
     "val_configure_model_settings_5": False,
     "val_configure_model_settings_6": False,
+    "tokenizer_branch_hit": False,
+    "weak model 1": False,
+    "weak model 2": False,
+    "weak model 3": False
 }
 
 @dataclass
@@ -350,13 +354,16 @@ class Model:
     def get_weak_model(self, provided_weak_model_name):
         # If weak_model_name is provided, override the model settings
         if provided_weak_model_name:
+            branch_coverage['weak model 1'] = True 
             self.weak_model_name = provided_weak_model_name
 
         if not self.weak_model_name:
+            branch_coverage['weak model 2'] = True 
             self.weak_model = self
             return
 
         if self.weak_model_name == self.name:
+            branch_coverage['weak model 3'] = True 
             self.weak_model = self
             return
 
@@ -374,6 +381,7 @@ class Model:
 
     def token_count(self, messages):
         if not self.tokenizer:
+            branch_coverage['tokenizer_branch_hit'] = True
             return
 
         if type(messages) is str:
