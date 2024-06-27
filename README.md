@@ -162,9 +162,108 @@ Improved branch coverage of the validate_variables function from 0% to 100%. In 
 
 Improved branch coverage of the configure_model_settings function from 65% to 94%. In the existing tests for the models.py file, the function was not tested and covered at all. Using my own coverage tool, I identified the cases and wrote five tests for the configure_model_settings function. These tests are included in the test_models file, which has been committed to GitHub and can be accessed using the link above.
 
+## Shadman Sahil Chowdhury (vunet-id: scy580)
+
+### First Function
+
+models.token_count in models.py file
 
 
+[Link to the commit](https://github.com/zaherlavi/aider/commit/cb27a2350bcb5f1c6b4e2932572fe041cffd19a8)
 
+<Provide a screenshot of the coverage results output by the instrumentation>
+
+![Alt text](/Imgaes/shadman-token_hit.jpg)
+
+### Second Function
+
+models.get_weak_model in models.py file
+
+[Link to the commit](https://github.com/zaherlavi/aider/commit/cb27a2350bcb5f1c6b4e2932572fe041cffd19a8)
+
+![Alt text](/Imgaes/shadman-weak_hit.jpg)
+
+
+## Coverage improvement
+
+### Individual tests
+
+<The following is supposed to be repeated for each group member>
+
+<Group member name>
+
+## Shadman Sahil Chowdhury (vunet-id: scy580)
+
+### Test 1
+
+[Link to the commit](https://github.com/zaherlavi/aider/commit/6dc42c2ed2f4d9c444c58c9e16e77986197b7ae3)
+
+<Provide a screenshot of the old coverage results (the same as you already showed above)>
+
+
+![Alt text](/Imgaes/shadman-token_count-before.png)
+
+<Provide a screenshot of the new coverage results>
+
+
+![Alt text](/Imgaes/shadman-token_count-after.png)
+
+<State the coverage improvement with a number and elaborate on why the coverage is improved>
+
+Improved branch coverage of the token_count function from 83% to 100%. In the existing tests for the models.py file, the function was not tested and covered at all. Using my own coverage tool, I identified the cases and wrote one test for the token_count function. This test is included in the test_models file, which has been committed to GitHub and can be accessed using the link above.
+
+### Test 2
+
+<Provide the same kind of information provided for Test 1>
+
+[Link to the commit](https://github.com/zaherlavi/aider/commit/5cb3207326e066a0e3840e1f47b45da5c52056ef)
+
+![Alt text](/Imgaes/shadman-get_weak_model-before.png)
+![Alt text](/Imgaes/shadman-get_weak_model-after.png)
+
+Improved branch coverage of the get_weak_model function from 90% to 100%. In the existing tests for the models.py file, the function was not tested and covered at all. Using my own coverage tool, I identified the cases and wrote one test for the get_weak_model function. The test is included in the test_models file, which has been committed to GitHub and can be accessed using the link above.
+
+## Ana Mafiyusef (vunet-id: ama487)
+
+### First Function
+run_cmd in linter.py file
+
+[Link to the commit](https://github.com/zaherlavi/aider/commit/4a5ed2828e8fb2d297868e9bbef449459c21b8d4)
+
+![Alt text](https://github.com/zaherlavi/aider/blob/main/Imgaes/ana-run_cmd.png?raw=true)
+
+## Second Function
+py_lint in linter.py file 
+
+[Link to the commit](https://github.com/zaherlavi/aider/commit/4a5ed2828e8fb2d297868e9bbef449459c21b8d4)
+
+![Alt text](https://github.com/zaherlavi/aider/blob/main/Imgaes/ana_py_lint.png?raw=true)
+
+## Coverage improvement
+
+### Individual tests
+
+<The following is supposed to be repeated for each group member>
+
+<Group member name>
+
+## Ana Mafiyusef (vunet-id: ama487)
+
+### Test 1
+[Link to the commit](https://github.com/zaherlavi/aider/commit/11b3b6eccf4529b64a31fd20f580d2ecaddf256a)
+
+![Alt text](https://github.com/zaherlavi/aider/blob/main/Imgaes/ana_run_cmd_before.png?raw=true)
+
+![Alt text](https://github.com/zaherlavi/aider/blob/main/Imgaes/ana_run_cmd_afterr.png?raw=true)
+
+I improved the branch coverage of the run_cmd function from 0% to 81%. Initially, there were no test files for linter.py, so I created a new file, test_linter.py.The test is included in the test_models file, which has been committed to GitHub and can be accessed using the link above.
+### Test 2
+
+![Alt text](https://github.com/zaherlavi/aider/blob/main/Imgaes/ana_py_lint_before.png?raw=true)
+
+![Alt text](https://github.com/zaherlavi/aider/blob/main/Imgaes/ana_py_lint_after.png?raw=true)
+
+I improved the branch coverage of the run_cmd function from 0% to 84%. Initially, there were no test files for linter.py, so I created a new file, test_linter.py.The test is included in the test_models file, which has been committed to GitHub and can be accessed using the link above.
 
 ### Overall
 
@@ -182,3 +281,4 @@ Improved branch coverage of the configure_model_settings function from 65% to 94
 
 Zaher Lavi: I improved the branch coverage of two functions. In the report, I worked on the sections covering the project chosen, coverage measurement, individual parts, and the overall.
 Vansham Ahluwalia: I checked and improved the branch coverage of two functions in models, updated the report and worked on my individual part and overall.
+Shadman Sahil: I improved the branch coverage of two functions, updated the report and worked on my individual part.
