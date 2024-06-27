@@ -166,22 +166,22 @@ Improved branch coverage of the configure_model_settings function from 65% to 94
 
 ### First Function
 
-models.token_count in models.py file
+Commands.cmd_commit() in commands.py file
 
 
-[Link to the commit](https://github.com/zaherlavi/aider/commit/cb27a2350bcb5f1c6b4e2932572fe041cffd19a8)
+[Link to the commit](https://github.com/zaherlavi/aider/commit/61af747ebe309ab536a875e3f951e3ed60c93402)
 
 <Provide a screenshot of the coverage results output by the instrumentation>
 
-![Alt text](/Imgaes/shadman-token_hit.jpg)
+![Alt text](/Imgaes/)
 
 ### Second Function
 
-models.get_weak_model in models.py file
+ Repomap.get_repo_map() in repomap.py file
 
-[Link to the commit](https://github.com/zaherlavi/aider/commit/cb27a2350bcb5f1c6b4e2932572fe041cffd19a8)
+[Link to the commit](https://github.com/zaherlavi/aider/commit/0d42b33d846081b2e099d1fbe553e78459ae1946)
 
-![Alt text](/Imgaes/shadman-weak_hit.jpg)
+![Alt text](/Imgaes/)
 
 
 ## Coverage improvement
@@ -196,32 +196,32 @@ models.get_weak_model in models.py file
 
 ### Test 1
 
-[Link to the commit](https://github.com/zaherlavi/aider/commit/6dc42c2ed2f4d9c444c58c9e16e77986197b7ae3)
+[Link to the commit](https://github.com/zaherlavi/aider/commit/08f5357b7e53ee6f0356847b91a8f1fd1dcbb688)
 
 <Provide a screenshot of the old coverage results (the same as you already showed above)>
 
 
-![Alt text](/Imgaes/shadman-token_count-before.png)
+![Alt text](/Imgaes/shadman-cmd-before.png)
 
 <Provide a screenshot of the new coverage results>
 
 
-![Alt text](/Imgaes/shadman-token_count-after.png)
+![Alt text](/Imgaes/shadman-cmd-after.png)
 
 <State the coverage improvement with a number and elaborate on why the coverage is improved>
 
-Improved branch coverage of the token_count function from 83% to 100%. In the existing tests for the models.py file, the function was not tested and covered at all. Using my own coverage tool, I identified the cases and wrote one test for the token_count function. This test is included in the test_models file, which has been committed to GitHub and can be accessed using the link above.
+Improved branch coverage of the cmd_commit function from 50% to 100%. In the existing tests for the commands.py file, the function was not tested and covered at all. Using my own coverage tool, I identified the cases and wrote tests for the function. These tests are included in the test_commands file, which has been committed to GitHub and can be accessed using the link above.
 
 ### Test 2
 
 <Provide the same kind of information provided for Test 1>
 
-[Link to the commit](https://github.com/zaherlavi/aider/commit/5cb3207326e066a0e3840e1f47b45da5c52056ef)
+[Link to the commit](https://github.com/zaherlavi/aider/commit/c33bd77946a7504e791a91768e7393cfac672713)
 
-![Alt text](/Imgaes/shadman-get_weak_model-before.png)
-![Alt text](/Imgaes/shadman-get_weak_model-after.png)
+![Alt text](/Imgaes/shadman-get_repo-before.png)
+![Alt text](/Imgaes/shadman-get_repo-after.png)
 
-Improved branch coverage of the get_weak_model function from 90% to 100%. In the existing tests for the models.py file, the function was not tested and covered at all. Using my own coverage tool, I identified the cases and wrote one test for the get_weak_model function. The test is included in the test_models file, which has been committed to GitHub and can be accessed using the link above.
+Improved branch coverage of the get_repo_map function from 69% to 82%. In the existing tests for the repomap.py file, the function was not tested and covered at all. Using my own coverage tool, I identified the cases and wrote 5 tests for the get_repo_map function. The tests are included in the test_repomap file, which has been committed to GitHub and can be accessed using the link above.
 
 ## Ana Mafiyusef (vunet-id: ama487)
 
