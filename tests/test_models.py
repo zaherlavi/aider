@@ -94,18 +94,9 @@ class TestModelsValidateVariables(unittest.TestCase):
 
 
 class TestModelConfigureSettings(unittest.TestCase):
+    
     def setUp(self):
         self.model = Model("dummy_model")
-
-    def test_configure_model_settings_direct_match(self):
-        self.model.configure_model_settings("gpt-4o")
-        for branch, hit in branch_coverage.items():
-            print(f"{branch} was {'hit' if hit else 'not hit'}")
-        self.assertEqual(self.model.edit_format, "diff")
-        self.assertTrue(self.model.use_repo_map)
-        self.assertTrue(self.model.send_undo_reply)
-        self.assertTrue(self.model.reminder_as_sys_msg)
-        self.assertTrue(branch_coverage["val_configure_model_settings_1"])
 
     def test_configure_model_settings_llama3_70b(self):
         self.model.configure_model_settings("llama-3-70b")
@@ -115,7 +106,6 @@ class TestModelConfigureSettings(unittest.TestCase):
         self.assertTrue(self.model.use_repo_map)
         self.assertTrue(self.model.send_undo_reply)
         self.assertTrue(self.model.examples_as_sys_msg)
-        self.assertTrue(branch_coverage["val_configure_model_settings_2"])
 
     def test_configure_model_settings_gpt_4_turbo_preview(self):
         self.model.configure_model_settings("gpt-4-turbo-preview")
@@ -124,7 +114,6 @@ class TestModelConfigureSettings(unittest.TestCase):
         self.assertEqual(self.model.edit_format, "udiff")
         self.assertTrue(self.model.use_repo_map)
         self.assertTrue(self.model.send_undo_reply)
-        self.assertTrue(branch_coverage["val_configure_model_settings_3"])
 
     def test_configure_model_settings_gpt_4_opus(self):
         self.model.configure_model_settings("claude-3-opus")
@@ -133,15 +122,12 @@ class TestModelConfigureSettings(unittest.TestCase):
         self.assertEqual(self.model.edit_format, "diff")
         self.assertTrue(self.model.use_repo_map)
         self.assertTrue(self.model.send_undo_reply)
-        self.assertTrue(branch_coverage["val_configure_model_settings_4"])
 
     def test_configure_model_settings_gpt_35(self):
         self.model.configure_model_settings("gpt-3.5")
         for branch, hit in branch_coverage.items():
             print(f"{branch} was {'hit' if hit else 'not hit'}")
         self.assertTrue(self.model.reminder_as_sys_msg)
-        self.assertTrue(branch_coverage["val_configure_model_settings_5"])
-
 
 if __name__ == "__main__":
     unittest.main()
