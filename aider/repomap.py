@@ -23,6 +23,18 @@ from aider.dump import dump  # noqa: F402,E402
 
 Tag = namedtuple("Tag", "rel_fname fname line name kind".split())
 
+global branch_coverage
+branch_coverage = {
+    "get_map_1" : False,
+    "get_map_2" : False,
+    "get_map_3" : False,
+    "get_map_4" : False,
+    "get_map_5" : False,
+    "get_map_6" : False,
+    "get_map_7" : False,
+    "get_map_8" : False
+
+}
 
 class RepoMap:
     CACHE_VERSION = 3
@@ -59,12 +71,16 @@ class RepoMap:
 
     def get_repo_map(self, chat_files, other_files, mentioned_fnames=None, mentioned_idents=None):
         if self.max_map_tokens <= 0:
+            branch_coverage["get_map_1"] = True
             return
         if not other_files:
+            branch_coverage["get_map_2"] = True
             return
         if not mentioned_fnames:
+            branch_coverage["get_map_3"] = True
             mentioned_fnames = set()
         if not mentioned_idents:
+            branch_coverage["get_map_4"] = True
             mentioned_idents = set()
 
         max_map_tokens = self.max_map_tokens
@@ -73,10 +89,13 @@ class RepoMap:
         MUL = 16
         padding = 4096
         if max_map_tokens and self.max_context_window:
+            branch_coverage["get_map_5"] = True
             target = min(max_map_tokens * MUL, self.max_context_window - padding)
         else:
+            branch_coverage["get_map_6"] = True
             target = 0
         if not chat_files and self.max_context_window and target > 0:
+            branch_coverage["get_map_7"] = True
             max_map_tokens = target
 
         try:
@@ -89,10 +108,12 @@ class RepoMap:
             return
 
         if not files_listing:
+            branch_coverage["get_map_8"] = True
             return
 
         num_tokens = self.token_count(files_listing)
         if self.verbose:
+            branch_coverage["get_map_9"] = True
             self.io.tool_output(f"Repo-map: {num_tokens/1024:.1f} k-tokens")
 
         if chat_files:
@@ -101,6 +122,7 @@ class RepoMap:
             other = ""
 
         if self.repo_content_prefix:
+            branch_coverage["get_map_10"] = True
             repo_content = self.repo_content_prefix.format(other=other)
         else:
             repo_content = ""
