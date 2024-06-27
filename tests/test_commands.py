@@ -9,8 +9,11 @@ from unittest import TestCase
 
 import git
 
+import unittest
+
 from aider.coders import Coder
 from aider.commands import Commands
+from aider.commands import branch_coverage
 from aider.dump import dump  # noqa: F401
 from aider.io import InputOutput
 from aider.models import Model
@@ -54,6 +57,7 @@ class TestCommands(TestCase):
         commands = Commands(io, coder)
 
         commands.cmd_add("**.txt")
+
 
     def test_cmd_add_with_glob_patterns(self):
         # Initialize the Commands and InputOutput objects
@@ -325,6 +329,48 @@ class TestCommands(TestCase):
             commit_message = "Test commit message"
             commands.cmd_commit(commit_message)
             self.assertFalse(repo.is_dirty())
+        
+    def test_1(self):
+        with GitTemporaryDirectory():
+            fname = "test.txt"
+            with open(fname, "w") as f:
+                f.write("test")
+            repo = git.Repo()
+            repo.git.add(fname)
+            repo.git.commit("-m", "initial")
+
+            io = InputOutput(pretty=False, yes=True)
+            coder = Coder.create(self.GPT35, None, io)
+            commands = Commands(io, coder)
+            commands.coder.repo = None
+            commands.cmd_commit()
+            for branch, hit in branch_coverage.items():
+             print(f"{branch} was {'hit' if hit else 'not hit'}")
+            self.assertTrue(branch_coverage["commit_1"])
+
+    def test_2(self):
+        with GitTemporaryDirectory():
+            fname = "test.txt"
+            with open(fname, "w") as f:
+                f.write("test")
+            repo = git.Repo()
+            repo.git.add(fname)
+            repo.git.commit("-m", "initial")
+
+            io = InputOutput(pretty=False, yes=True)
+            coder = Coder.create(self.GPT35, None, io)
+            commands = Commands(io, coder)
+
+            self.assertFalse(repo.is_dirty())
+            with open(fname, "w") as f:
+                f.write("new")
+            self.assertTrue(repo.is_dirty())
+
+            commit_message = "Test commit message"
+            commands.cmd_commit(commit_message)
+            self.assertFalse(repo.is_dirty())
+
+            commands.cmd_commit()
 
     def test_cmd_add_from_outside_root(self):
         with ChdirTemporaryDirectory() as tmp_dname:
@@ -523,16 +569,20 @@ class TestCommands(TestCase):
             other_path.write_text("other content")
             repo.git.add(str(other_path))
 
+            os.environ["GIT_AUTHOR_NAME"] = "Foo (aider)"
+
             # Create and commit a file
             filename = "test_file.txt"
             file_path = Path(repo_dir) / filename
             file_path.write_text("first content")
             repo.git.add(filename)
-            repo.git.commit("-m", "aider: first commit")
+            repo.git.commit("-m", "first commit")
 
             file_path.write_text("second content")
             repo.git.add(filename)
-            repo.git.commit("-m", "aider: second commit")
+            repo.git.commit("-m", "second commit")
+
+            del os.environ["GIT_AUTHOR_NAME"]
 
             # Store the commit hash
             last_commit_hash = repo.head.commit.hexsha[:7]
