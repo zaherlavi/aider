@@ -173,7 +173,7 @@ Commands.cmd_commit() in commands.py file
 
 <Provide a screenshot of the coverage results output by the instrumentation>
 
-![Alt text](/Imgaes/)
+![Alt text](/Imgaes/shadman-commit_hits.png)
 
 ### Second Function
 
@@ -181,7 +181,7 @@ Commands.cmd_commit() in commands.py file
 
 [Link to the commit](https://github.com/zaherlavi/aider/commit/0d42b33d846081b2e099d1fbe553e78459ae1946)
 
-![Alt text](/Imgaes/)
+![Alt text](/Imgaes/shadman-map_hits.png)
 
 
 ## Coverage improvement
