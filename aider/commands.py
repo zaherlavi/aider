@@ -15,6 +15,12 @@ from aider.utils import is_image_file
 
 from .dump import dump  # noqa: F401
 
+global branch_coverage
+branch_coverage = {
+    "commit_1" : False,
+    "commit_2" : False
+}
+
 
 class SwitchModel(Exception):
     def __init__(self, model):
@@ -121,7 +127,6 @@ class Commands:
     def run(self, inp):
         if inp.startswith("!"):
             return self.do_run("run", inp[1:])
-            return
 
         res = self.matching_commands(inp)
         if res is None:
@@ -142,11 +147,14 @@ class Commands:
     def cmd_commit(self, args=None):
         "Commit edits to the repo made outside the chat (commit message optional)"
 
+        print(self.coder.repo)
         if not self.coder.repo:
+            branch_coverage["commit_1"] = True
             self.io.tool_error("No git repository found.")
             return
 
         if not self.coder.repo.is_dirty():
+            branch_coverage["commit_1"] = True
             self.io.tool_error("No more changes to commit.")
             return
 
@@ -333,7 +341,7 @@ class Commands:
 
         last_commit = self.coder.repo.repo.head.commit
         if (
-            not last_commit.message.startswith("aider:")
+            not last_commit.author.name.endswith(" (aider)")
             or last_commit.hexsha[:7] != self.coder.last_aider_commit_hash
         ):
             self.io.tool_error("The last commit was not made by aider in this chat session.")
