@@ -73,7 +73,6 @@ class TestModelConfigureSettings(unittest.TestCase):
     def setUp(self):
         self.model = Model("dummy_model")
 
-   
     def test_configure_model_settings_llama3_70b(self):
         self.model.configure_model_settings("llama-3-70b")
         for branch, hit in branch_coverage.items():
@@ -83,7 +82,6 @@ class TestModelConfigureSettings(unittest.TestCase):
         self.assertTrue(self.model.send_undo_reply)
         self.assertTrue(self.model.examples_as_sys_msg)
 
-    
     def test_configure_model_settings_gpt_4_turbo_preview(self):
         self.model.configure_model_settings("gpt-4-turbo-preview")
         for branch, hit in branch_coverage.items():
@@ -92,7 +90,6 @@ class TestModelConfigureSettings(unittest.TestCase):
         self.assertTrue(self.model.use_repo_map)
         self.assertTrue(self.model.send_undo_reply)
 
-    
     def test_configure_model_settings_gpt_4_opus(self):
         self.model.configure_model_settings("claude-3-opus")
         for branch, hit in branch_coverage.items():
@@ -101,7 +98,6 @@ class TestModelConfigureSettings(unittest.TestCase):
         self.assertTrue(self.model.use_repo_map)
         self.assertTrue(self.model.send_undo_reply)
 
-    
     def test_configure_model_settings_gpt_35(self):
         self.model.configure_model_settings("gpt-3.5")
         for branch, hit in branch_coverage.items():
