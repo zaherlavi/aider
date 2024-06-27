@@ -70,6 +70,7 @@ class TestModelsValidateVariables(unittest.TestCase):
 
 
 class TestModelConfigureSettings(unittest.TestCase):
+    
     def setUp(self):
         self.model = Model("dummy_model")
 
