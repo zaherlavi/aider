@@ -108,7 +108,7 @@ Improved branch coverage of the tool_error function from 75% to 100%. In the exi
 models.validate_variables in models.py file
 
 
-[Link to the commit](https://github.com/zaherlavi/aider/commit/9ee753e4e772ae2d1bbe461347927ba0d8835a9d?diff=split&w=0)
+[Link to the commit](https://github.com/Vansham8/aider/commit/2a335e17e59533ec5a4d3eb842e32c57c6949ae7)
 
 <Provide a screenshot of the coverage results output by the instrumentation>
 
@@ -118,7 +118,7 @@ models.validate_variables in models.py file
 
 InputOutput.tool_error in io.py file
 
-[Link to the commit](https://github.com/zaherlavi/aider/commit/9ee753e4e772ae2d1bbe461347927ba0d8835a9d?diff=split&w=0)
+[Link to the commit](https://github.com/Vansham8/aider/commit/2a335e17e59533ec5a4d3eb842e32c57c6949ae7)
 
 ![Alt text](/Imgaes/vansham_configure_model_settings.png)
 
@@ -135,7 +135,7 @@ InputOutput.tool_error in io.py file
 
 ### Test 1
 
-[Link to the commit](https://github.com/zaherlavi/aider/commit/9ee753e4e772ae2d1bbe461347927ba0d8835a9d?diff=split&w=0)
+[Link to the commit](https://github.com/Vansham8/aider/commit/2a335e17e59533ec5a4d3eb842e32c57c6949ae7)
 
 <Provide a screenshot of the old coverage results (the same as you already showed above)>
 
@@ -155,7 +155,7 @@ Improved branch coverage of the validate_variables function from 0% to 100%. In 
 
 <Provide the same kind of information provided for Test 1>
 
-[Link to the commit](https://github.com/zaherlavi/aider/commit/9ee753e4e772ae2d1bbe461347927ba0d8835a9d?diff=split&w=0)
+[Link to the commit](https://github.com/Vansham8/aider/commit/2a335e17e59533ec5a4d3eb842e32c57c6949ae7)
 
 ![Alt text](/Imgaes/vansham_old_percentage_configure_model_settings.png)
 ![Alt text](/Imgaes/vansham_new_percentage_configure_model_settings.png)
