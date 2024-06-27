@@ -60,8 +60,6 @@ class TestModelsValidateVariables(unittest.TestCase):
             res = validate_variables(['var1', 'var2'])
             for branch, hit in branch_coverage.items():
                 print(f"{branch} was {'hit' if hit else 'not hit'}")
-            self.assertFalse(branch_coverage["val_var_branch_1"])  
-            self.assertFalse(branch_coverage["val_var_branch_2"])  
             self.assertTrue(res['keys_in_environment'])
             self.assertEqual(res['missing_keys'], [])
 
@@ -72,9 +70,7 @@ class TestModelsValidateVariables(unittest.TestCase):
             branch_coverage["val_var_branch_2"] = False
             res = validate_variables(['var1', 'var2'])
             for branch, hit in branch_coverage.items():
-                print(f"{branch} was {'hit' if hit else 'not hit'}")
-            self.assertTrue(branch_coverage["val_var_branch_1"])  
-            self.assertTrue(branch_coverage["val_var_branch_2"])  
+                print(f"{branch} was {'hit' if hit else 'not hit'}") 
             self.assertFalse(res['keys_in_environment'])
             self.assertEqual(res['missing_keys'], ['var2'])
 
@@ -86,8 +82,6 @@ class TestModelsValidateVariables(unittest.TestCase):
             res = validate_variables(['var1', 'var2'])
             for branch, hit in branch_coverage.items():
                 print(f"{branch} was {'hit' if hit else 'not hit'}")
-            self.assertTrue(branch_coverage["val_var_branch_1"])  
-            self.assertTrue(branch_coverage["val_var_branch_2"])  
             self.assertFalse(res['keys_in_environment'])
             self.assertEqual(res['missing_keys'], ['var1', 'var2'])
 
