@@ -174,9 +174,11 @@ Improved branch coverage of the configure_model_settings function from 65% to 94
 
 <Provide a screenshot of the new coverage results by running the existing tool using all test modifications made by the group>
 
+![Alt text](/Imgaes/new_coverage.png)
 
 ## Statement of individual contributions
 
 <Write what each group member did>
 
 Zaher Lavi: I improved the branch coverage of two functions. In the report, I worked on the sections covering the project chosen, coverage measurement, individual parts, and the overall.
+Vansham Ahluwalia: I checked and improved the branch coverage of two functions in models, updated the report and worked on my individual part and overall.
