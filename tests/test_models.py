@@ -55,8 +55,6 @@ class TestModelsValidateVariables(unittest.TestCase):
 
     def test_validate_variables_all_present(self):
         with patch('aider.models.os.environ', {'var1', 'var2'}):
-            branch_coverage["val_var_branch_1"] = False
-            branch_coverage["val_var_branch_2"] = False
             res = validate_variables(['var1', 'var2'])
             for branch, hit in branch_coverage.items():
                 print(f"{branch} was {'hit' if hit else 'not hit'}")
@@ -66,8 +64,6 @@ class TestModelsValidateVariables(unittest.TestCase):
 
     def test_validate_variables_one_missing(self):
         with patch('aider.models.os.environ', {'var1'}):
-            branch_coverage["val_var_branch_1"] = False
-            branch_coverage["val_var_branch_2"] = False
             res = validate_variables(['var1', 'var2'])
             for branch, hit in branch_coverage.items():
                 print(f"{branch} was {'hit' if hit else 'not hit'}") 
@@ -77,8 +73,6 @@ class TestModelsValidateVariables(unittest.TestCase):
     
     def test_validate_variables_all_missing(self):
         with patch('aider.models.os.environ', {}):
-            branch_coverage["val_var_branch_1"] = False
-            branch_coverage["val_var_branch_2"] = False
             res = validate_variables(['var1', 'var2'])
             for branch, hit in branch_coverage.items():
                 print(f"{branch} was {'hit' if hit else 'not hit'}")
