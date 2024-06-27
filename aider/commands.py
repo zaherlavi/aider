@@ -154,7 +154,7 @@ class Commands:
             return
 
         if not self.coder.repo.is_dirty():
-            branch_coverage["commit_1"] = True
+            branch_coverage["commit_2"] = True
             self.io.tool_error("No more changes to commit.")
             return
 
